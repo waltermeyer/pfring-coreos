@@ -25,7 +25,7 @@ script:
     RELEASE=$alpha;
   fi
 - docker run -d --name build_env -e release=$RELEASE waltermeyer/pfring-coreos
-- docker cp build_env:/builds/* . 
+- docker cp build_env:/builds/ . 
 
 after_success:	
 - eval "$(ssh-agent -s)"
