@@ -1,0 +1,41 @@
+sudo: false
+
+branches:
+  except:
+    - master
+
+env:
+- stable=835.9.0
+- beta=877.1.0
+- alpha=891.0.0
+
+services:
+- docker
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_4f0c85a4159b_key
+  -iv $encrypted_4f0c85a4159b_iv
+  -in key.enc -out .travis/key -d
+- docker build -t waltermeyer/pfring-coreos .
+
+script:
+- if [ "$TRAVIS_BRANCH" == "stable" ]; then
+    RELEASE=$stable;
+  elif [ "$TRAVIS_BRANCH" == "beta" ]; then
+    RELEASE=$beta;
+  elif [ "$TRAVIS_BRANCH" == "alpha" ]; then
+    RELEASE=$alpha;
+  fi
+- docker run -d --name build_env -e release=$RELEASE
+- docker cp build_env:/builds/* . 
+
+after_success:	
+- eval "$(ssh-agent -s)"
+- chmod 600 .travis/key
+- ssh-add .travis/key
+- git remote add deploy https://github.com/waltermeyer/pfring-coreos/
+- git add builds/
+- git commit -m "Travis-CI auto-build for CoreOS $TRAVIS_BRANCH $RELEASE"
+- git tag $RELEASE
+- git push deploy $TRAVIS_BRANCH
+- git push deploy $RELEASE
