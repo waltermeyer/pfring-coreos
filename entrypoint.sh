@@ -26,8 +26,8 @@ cd /opt/pfring/kernel && make
 cd /opt/pfring/drivers/ZC && make
 
 # Output directories
-mkdir -p /builds/{kernel,drivers}
-mkdir -p /builds/drivers/ZC/intel/{e1000e,igb,ixgbe,i40e}
+mkdir -p /builds/{kernel,drivers}/
+mkdir -p /builds/drivers/ZC/intel/{e1000e,igb,ixgbe,i40e}/
 
 # kernel
 cp /opt/pfring/kernel/pf_ring.ko /builds/kernel/
