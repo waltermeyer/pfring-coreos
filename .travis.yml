@@ -24,7 +24,7 @@ script:
   elif [ "$TRAVIS_BRANCH" == "alpha" ]; then
     RELEASE=$alpha;
   fi
-- docker run -d --name build_env -e release=$RELEASE
+- docker run -d --name build_env -e release=$RELEASE waltermeyer/pfring-coreos
 - docker cp build_env:/builds/* . 
 
 after_success:	
