@@ -1,8 +1,5 @@
 sudo: false
 
-deploy:
-	skip_cleanup: true
-
 env:
 # stable
 - RELEASE=835.9.0
