@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Last Updated: 12/14/2015
-# CoreOS Stable: 835.9.0
-# CoreOS Beta: 877.1.0
-# CoreOS Alpha: 891.0.0
-
 # Get the CoreOS kernel version we want to compile against from $release env var
 kernel=$(wget -qO- https://coreos.com/releases/releases.json | \
 jq --arg release $release .['$release] | ."major_software" | ."kernel"| .[0]' |
