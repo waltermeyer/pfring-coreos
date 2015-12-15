@@ -23,8 +23,9 @@ after_success:
 - eval "$(ssh-agent -s)"
 - chmod 600 .travis/key
 - ssh-add .travis/key
-- git remote add deploy https://github.com/waltermeyer/pfring-coreos/
+- git remote add deploy git@github.com:waltermeyer/pfring-coreos.git
 - docker cp build_env:/builds/ .
+- pwd
 - git add builds/*
 - git commit -m "Travis-CI auto-build for CoreOS $RELEASE"
 - git tag $RELEASE
