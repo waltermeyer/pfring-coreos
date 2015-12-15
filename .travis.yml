@@ -21,17 +21,14 @@ before_install:
 script:
 - docker run -d --name build_env -e release=$RELEASE waltermeyer/pfring-coreos
 - docker wait build_env
-- docker cp build_env:/builds/ . 
 
 after_success:	
 - eval "$(ssh-agent -s)"
 - chmod 600 .travis/key
 - ssh-add .travis/key
 - git remote add deploy https://github.com/waltermeyer/pfring-coreos/
-- ls -la
-- ls -la builds/
+- docker cp build_env:/builds/ .
 - git add builds/*
 - git commit -m "Travis-CI auto-build for CoreOS $RELEASE"
 - git tag $RELEASE
-- git push deploy
 - git push deploy $RELEASE
