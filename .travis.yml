@@ -25,6 +25,7 @@ script:
     RELEASE=$alpha;
   fi
 - docker run -d --name build_env -e release=$RELEASE waltermeyer/pfring-coreos
+- docker wait build_env
 - docker cp build_env:/builds/ . 
 
 after_success:	
