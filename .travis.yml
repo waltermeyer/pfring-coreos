@@ -2,11 +2,11 @@ sudo: true
 
 env:
 # stable
-- RELEASE=835.9.0
+- CHANNEL=stable RELEASE=835.9.0
 # beta
-- RELEASE=877.1.0
+- CHANNEL=beta RELEASE=877.1.0
 # alpha
-- RELEASE=891.0.0
+- CHANNEL=alpha RELEASE=891.0.0
 
 services:
 - docker
