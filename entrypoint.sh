@@ -8,7 +8,15 @@ tr -d '"')
 # Compilation preparation
 cd /usr/src/kernels/linux
 git checkout -b stable v$kernel
-zcat /proc/config.gz > .config
+
+# Get Kernel config from coreos/coreos-overlay source tree for $release
+build_id=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/version.txt | \
+	grep COREOS_BUILD= | sed 's/.*=//')
+comm_hash=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/build-$build_id.xml | \
+	grep coreos/coreos-overlay | awk '{print$5}' | sed 's/.*=//' | tr -d '"')
+kernel_simple=$(echo $kernel | cut -d . -f -2)
+wget -O .config https://raw.githubusercontent.com/coreos/coreos-overlay/$comm_hash/sys-kernel/coreos-kernel/files/amd64_defconfig-$kernel_simple
+
 make modules_prepare
 sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 mkdir -p /lib/modules/$kernel-coreos-r1/
