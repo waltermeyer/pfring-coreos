@@ -35,6 +35,7 @@ RUN cd /usr/src/kernels && \
 RUN git clone https://github.com/ntop/PF_RING.git /opt/pfring && \
 	cd /opt/pfring && git checkout -b $pf_ring_version
 
+ADD .config /.config
 ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]

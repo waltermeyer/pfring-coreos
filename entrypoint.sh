@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Get the CoreOS kernel version we want to compile against from $release env var
 kernel=$(wget -qO- https://coreos.com/releases/releases.json | \
@@ -8,15 +8,16 @@ tr -d '"')
 # Compilation preparation
 cd /usr/src/kernels/linux
 git checkout -b stable v$kernel
+make mrproper
 
 # Get Kernel config from coreos/coreos-overlay source tree for $release
-build_id=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/version.txt | \
-	grep COREOS_BUILD= | sed 's/.*=//')
-comm_hash=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/build-$build_id.xml | \
-	grep coreos/coreos-overlay | awk '{print$5}' | sed 's/.*=//' | tr -d '"')
-kernel_simple=$(echo $kernel | cut -d . -f -2)
-wget -O .config https://raw.githubusercontent.com/coreos/coreos-overlay/$comm_hash/sys-kernel/coreos-kernel/files/amd64_defconfig-$kernel_simple
-
+# build_id=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/version.txt | \
+# 	grep COREOS_BUILD= | sed 's/.*=//')
+# comm_hash=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/build-$build_id.xml | \
+# 	grep coreos/coreos-overlay | awk '{print$5}' | sed 's/.*=//' | tr -d '"')
+# kernel_simple=$(echo $kernel | cut -d . -f -2)
+# wget -O .config https://raw.githubusercontent.com/coreos/coreos-overlay/$comm_hash/sys-kernel/coreos-kernel/files/amd64_defconfig-$kernel_simple
+mv /.config .
 make modules_prepare
 sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 mkdir -p /lib/modules/$kernel-coreos-r1/
