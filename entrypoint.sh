@@ -8,6 +8,12 @@ tr -d '"')
 # Compilation preparation
 cd /usr/src/kernels/linux
 ln -s /usr/src/kernels/linux/ /usr/src/linux
+
+# Strip .0 for kernel version tag
+if [ "${kernel: -1}" -eq "0" ]; then
+	kernel=$(echo $kernel | cut -d . -f -2)
+fi
+
 git checkout -b stable v$kernel
 make mrproper
 cp /.config .

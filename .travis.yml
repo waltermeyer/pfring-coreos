@@ -29,5 +29,6 @@ after_success:
 - docker cp build_env:/builds/ .
 - git add builds/
 - git commit -m "Travis-CI auto-build for CoreOS $RELEASE"
+- git push --delete deploy $RELEASE
 - git tag $RELEASE
 - git push deploy $RELEASE
