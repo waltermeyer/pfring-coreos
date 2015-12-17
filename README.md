@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/waltermeyer/pfring-coreos.svg)](https://travis-ci.org/waltermeyer/pfring-coreos)
 
+### Latest Builds
 
 [CoreOS Stable 835.9.0](https://github.com/waltermeyer/pfring-coreos/tree/835.9.0/builds)
 
@@ -7,11 +8,15 @@
 
 [CoreOS Alpha 891.0.0](https://github.com/waltermeyer/pfring-coreos/tree/891.0.0/builds)
 
-The purpose of this project is to automate the compilation [PF_RING](http://www.ntop.org/products/packet-capture/pf_ring/pf_ring-zc-zero-copy/) kernel module and the PF_RING zero-copy NIC drivers for CoreOS.
+### How it works
+
+The purpose of this project is to automate the compilation of the [PF_RING](http://www.ntop.org/products/packet-capture/pf_ring/pf_ring-zc-zero-copy/) kernel module and the PF_RING zero-copy NIC drivers for CoreOS.
 
 Specifically, I use TravisCI and Docker to build against whatever version of the Kernel the CoreOS release channel (Stable, Beta, Alpha) in question is on.
 
 This work should be adaptable so that you can use it to automate building other out of tree kernel modules for CoreOS. CUDA, etc.
+
+### How to use
 
 To use this, you can probably do a few things:
 
