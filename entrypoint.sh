@@ -9,26 +9,23 @@ tr -d '"')
 cd /usr/src/kernels/linux
 git checkout -b stable v$kernel
 make mrproper
-
-# Get Kernel config from coreos/coreos-overlay source tree for $release
-# build_id=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/version.txt | \
-# 	grep COREOS_BUILD= | sed 's/.*=//')
-# comm_hash=$(wget -qO- https://raw.githubusercontent.com/coreos/manifest/v$release/build-$build_id.xml | \
-# 	grep coreos/coreos-overlay | awk '{print$5}' | sed 's/.*=//' | tr -d '"')
-# kernel_simple=$(echo $kernel | cut -d . -f -2)
-# wget -O .config https://raw.githubusercontent.com/coreos/coreos-overlay/$comm_hash/sys-kernel/coreos-kernel/files/amd64_defconfig-$kernel_simple
 mv /.config .
 make modules_prepare
 sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
-mkdir -p /lib/modules/$kernel-coreos-r1/
-ln -s /usr/src/kernels/linux/ /lib/modules/$kernel-coreos-r1/build
 
 # Compilation: pf_ring kernel module
-cd /opt/pfring/kernel && make
+cd /opt/pfring/kernel
+make -C /usr/src/kernels/linux/ M=$PWD
 
 # Compilation: pf_ring drivers
-cd /opt/pfring/drivers/ZC && make
+cd /opt/pfring/drivers/ZC
+make -C /usr/src/kernels/linux/ M=$PWD
 
+# Compilation: pf_ring snort daq zc
+# cd /opt/pfring/userland/snort/pfring-daq-module-zc
+# autoreconf -ivf
+# ./configure; make
+	
 # Output directories
 mkdir -p /builds/kernel/
 mkdir -p /builds/drivers/ZC/intel/e1000e/

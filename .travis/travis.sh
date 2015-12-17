@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 wget http://$CHANNEL.release.core-os.net/amd64-usr/$RELEASE/coreos_developer_container.bin.bz2
 bunzip2 coreos_developer_container.bin.bz2
