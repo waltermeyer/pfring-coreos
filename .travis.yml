@@ -28,7 +28,7 @@ after_success:
 - git remote add deploy git@github.com:waltermeyer/pfring-coreos.git
 - docker cp build_env:/builds/ .
 - git add builds/
-- git commit -m "Travis-CI auto-build for CoreOS $CHANNEL $RELEASE"
+- git commit -m "Travis-CI auto-build for CoreOS $CHANNEL $RELEASE [ci skip]"
 - git tag -d $RELEASE
 - git push --delete deploy $RELEASE
 - git tag $RELEASE
