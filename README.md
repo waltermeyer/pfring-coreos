@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/waltermeyer/pfring-coreos.svg)](https://travis-ci.org/waltermeyer/pfring-coreos)
 
 
-[CoreOS Stable 835.9.0 Stable](https://github.com/waltermeyer/pfring-coreos/tree/835.9.0/builds)
+[CoreOS Stable 835.9.0](https://github.com/waltermeyer/pfring-coreos/tree/835.9.0/builds)
 
-[CoreOS Beta 877.1.0 Stable](https://github.com/waltermeyer/pfring-coreos/tree/877.1.0/builds)
+[CoreOS Beta 877.1.0](https://github.com/waltermeyer/pfring-coreos/tree/877.1.0/builds)
 
-[CoreOS Alpha 891.0.0 Stable](https://github.com/waltermeyer/pfring-coreos/tree/891.0.0/builds)
+[CoreOS Alpha 891.0.0](https://github.com/waltermeyer/pfring-coreos/tree/891.0.0/builds)
 
 The purpose of this project is to automate the compilation [PF_RING](http://www.ntop.org/products/packet-capture/pf_ring/pf_ring-zc-zero-copy/) kernel module and the PF_RING zero-copy NIC drivers for CoreOS.
 
