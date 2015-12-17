@@ -6,5 +6,5 @@ e.g. if you are running CoreOS release 835.9.0, get it explicitly:
 
 https://github.com/waltermeyer/pfring-coreos/tree/835.9.0/builds/kernel/pf_ring.ko
 
-Raw:
+RAW:
 https://raw.githubusercontent.com/waltermeyer/pfring-coreos/835.9.0/builds/kernel/pf_ring.ko
