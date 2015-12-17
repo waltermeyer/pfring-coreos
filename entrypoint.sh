@@ -7,18 +7,28 @@ tr -d '"')
 
 # Compilation preparation
 cd /usr/src/kernels/linux
+ln -s /usr/src/kernels/linux/ /usr/src/linux
 git checkout -b stable v$kernel
 make mrproper
-mv /.config .
+cp /.config .
 make modules_prepare
-sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 
 # Compilation: pf_ring kernel module
 cd /opt/pfring/kernel
+cp linux/pf_ring.h /usr/src/kernels/linux/include/linux/
 make -C /usr/src/kernels/linux/ M=$PWD
 
 # Compilation: pf_ring drivers
-cd /opt/pfring/drivers/ZC
+cd /opt/pfring/drivers/ZC/intel/i40e/i40e-*/src/i40e/
+make -C /usr/src/kernels/linux/ M=$PWD
+
+cd /opt/pfring/drivers/ZC/intel/igb/igb-*/src/
+make -C /usr/src/kernels/linux/ M=$PWD
+
+cd /opt/pfring/drivers/ZC/intel/e1000e/e1000e-*/src/
+make -C /usr/src/kernels/linux/ M=$PWD
+
+cd /opt/pfring/drivers/ZC/intel/ixgbe/ixgbe-*/src/
 make -C /usr/src/kernels/linux/ M=$PWD
 
 # Compilation: pf_ring snort daq zc
