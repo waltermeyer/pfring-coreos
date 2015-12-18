@@ -16,6 +16,7 @@ fi
 
 git checkout -b stable v$kernel
 make mrproper
+sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 cp /.config .
 make modules_prepare
 
@@ -36,11 +37,6 @@ make -C /usr/src/kernels/linux/ M=$PWD
 
 cd /opt/pfring/drivers/ZC/intel/ixgbe/ixgbe-*/src/
 make -C /usr/src/kernels/linux/ M=$PWD
-
-# Compilation: pf_ring snort daq zc
-# cd /opt/pfring/userland/snort/pfring-daq-module-zc
-# autoreconf -ivf
-# ./configure; make
 	
 # Output directories
 mkdir -p /builds/kernel/
