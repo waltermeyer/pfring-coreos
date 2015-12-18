@@ -16,9 +16,9 @@ fi
 
 git checkout -b stable v$kernel
 make mrproper
-sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 cp /.config .
 make modules_prepare
+sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 
 # Compilation: pf_ring kernel module
 cd /opt/pfring/kernel
