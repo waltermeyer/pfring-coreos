@@ -29,7 +29,7 @@ RUN apt-get -y update && apt-get -y \
 
 # Download kernel source
 RUN cd /usr/src/kernels && \
-	git clone https://github.com/torvalds/linux.git linux
+    git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux
 
 # Get pfring source
 RUN git clone https://github.com/ntop/PF_RING.git /opt/pfring && \
