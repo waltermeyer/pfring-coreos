@@ -17,7 +17,7 @@ FROM debian:jessie
 MAINTAINER Walter Meyer <wgmeyer@gmail.com>
 
 # PF_RING Version
-ENV pf_ring_version 6.0.3-stable
+ENV pf_ring_version 6.2.0-stable
 
 # Setup environment
 RUN apt-get -y update && apt-get -y \
