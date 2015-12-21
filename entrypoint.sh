@@ -14,7 +14,7 @@ if [ "${kernel: -1}" -eq "0" ]; then
 	kernel=$(echo $kernel | cut -d . -f -2)
 fi
 
-git checkout -b stable origin/v$kernel
+git checkout v$kernel
 make mrproper
 cp /.config .
 make modules_prepare
