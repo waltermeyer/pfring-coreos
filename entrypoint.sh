@@ -18,6 +18,7 @@ git checkout v$kernel
 make mrproper
 cp /.config .
 make modules_prepare
+make modules
 sed -i "s/$kernel/$kernel-coreos-r1/g" include/generated/utsrelease.h
 
 # Compilation: pf_ring kernel module
